@@ -201,6 +201,7 @@ public class Server : MonoBehaviour {
             clone = Instantiate(piece);
             PieceLabel cloneL = clone.GetComponent<PieceLabel>();
             Destroy(cloneL);
+            Destroy(piece.GetComponent<PieceLabel>().text);
             Destroy(piece.GetComponent<PieceLabel>());
             Destroy(piece);
             clone.name = clone.GetComponent<Piece>().id.ToString() + "P";

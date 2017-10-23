@@ -413,6 +413,11 @@ public class Server : MonoBehaviour {
         {
             return;
         }
+        if (x == "end")
+        {
+            EndGame();
+            SceneManager.LoadScene("Disconnected");
+        }
         string[] xs = x.Split('_');
         if (xs[0] == "R")
         {
@@ -463,7 +468,7 @@ public class Server : MonoBehaviour {
         enemy = target;
     }
 
-    public void OnApplicationQuit()
+    public void EndGame()
     {
         HttpClient client = new HttpClient();
 
@@ -478,6 +483,26 @@ public class Server : MonoBehaviour {
             read = read.Trim(new char[2] { '"', '\\' });
             Debug.Log(read);
         });
+    }
+
+    public void OnApplicationQuit()
+    {
+
+        HttpClient client = new HttpClient();
+
+        string uri;
+
+        if (pirate)
+            uri = "http://boardserverconnection.azurewebsites.net/api/sendmessage/1/" + player + "/end";
+        else
+            uri = "http://boardserverconnection.azurewebsites.net/api/sendmessage/0/" + player + "/end";
+
+        client.GetString(new System.Uri(uri), (r) =>
+        {
+            read = r.Data;
+            read = read.Trim(new char[2] { '"', '\\' });
+        });
+
         Exit();
     }
 }

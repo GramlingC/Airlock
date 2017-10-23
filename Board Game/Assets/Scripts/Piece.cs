@@ -26,7 +26,7 @@ public class Piece : MonoBehaviour {
     // Use this for initialization
     void Start ()
     {
-        camera = GameObject.FindObjectOfType<Camera>();
+        camera = GameObject.Find("Camera1").GetComponent<Camera>();
         cameraS = camera.GetComponent<cameraController>();
         server = GameObject.FindObjectOfType<Server>();
         home = null;
@@ -44,8 +44,9 @@ public class Piece : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+        camera = g.currentCamera.gameObject.GetComponent<Camera>();
 
-        
+
 
         tLabel = Name;
         if (Name == "Generators")

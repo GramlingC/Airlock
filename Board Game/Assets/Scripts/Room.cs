@@ -71,6 +71,10 @@ public class Room : MonoBehaviour {
         }
         if (g.pirateCost(2))
         {
+            if (roomNumber == 14)
+            {
+                g.bridgeCaptured();
+            }
             Breach = true;
             Destroy(cb.button);
             cb.enabled = false;
